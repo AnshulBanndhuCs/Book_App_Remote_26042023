@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        font: 20px Montserrat, sans-serif;
+        line-height: 1.8;
+        color: #096dd1;
+      }
+      p {
+        font-size: 16px;
+      }
+      .margin {
+        margin-bottom: 45px;
+      }
+      .bg-1 {
+        background-color: #1abc9c; /* Green */
+        color: #ffffff;
+      }
+      .bg-2 {
+        background-color: #474e5d; /* Dark Blue */
+        color: #ffffff;
+      }
+      .bg-3 {
+        background-color: #ffffff; /* White */
+        color: #555555;
+      }
+      .bg-4 {
+        background-color: #2f2f2f; /* Black Gray */
+        color: #fff;
+      }
+      .container-fluid {
+        padding-top: 70px;
+        padding-bottom: 70px;
+      }
+      .navbar {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+      }
+      .navbar-nav li a:hover {
+        color: #1abc9c !important;
+      }
+      /* .cards {
+        display: flex;
+        justify-content: space-between;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="row">
+      <div class="p-2 col-9">
+        <h2>Book List</h2>
+      </div>
+      <div class="col-3">
+        <button
+          (click)="onPress()"
+          class="m-2 btn btn-outline-primary form-control rounded-pill"
+        >
+          <i class="fa fa-plus"></i> New Book
+        </button>
+        <div id="newbook-render" routerLink="books/newbook" *ngIf="display">
+          <app-newbook></app-newbook>
+        </div>
+      </div>
+    </div>
+    <!-- Body -->
+    <div class="row">
+      <div class="col-lg-3 col-md-6" *ngFor="let bookData of bookList">
+        <div class="row p-2">
+          <div
+            class="col-lg-12 p-1"
+            style="border: 1px solid #008cba; border-radius: 5px"
+          >
+            <div class="card" style="border: 0px">
+              <img
+                src="@bookData.image"
+                class="card-img-top rounded"
+                alt="Book"
+              />
+              <div class="pl-1">
+                <p class="card-title h5">
+                  <b style="color: #2c3e50"
+                    ><u>{{ bookData.title }}</u></b
+                  >
+                </p>
+                <p class="card-title text-primary">
+                  by <b>{{ bookData.author }}</b>
+                </p>
+                <p class="card-title text-primary">
+                  Genre <b>{{ bookData.genre.genreName }}</b>
+                </p>
+              </div>
+              <div style="padding-left: 5px">
+                <p style="color: maroon">
+                  Description:<b class="">{{
+                    removeTags(bookData.description)
+                  }}</b>
+                </p>
+              </div>
+            </div>
+            <div>
+              <button
+                (click)="readClick()"
+                class="btn m-1 rounded-pill shadow"
+                style="background-color: #e76f51"
+              >
+              <i class="fas fa-book-reader"></i>
+              </button>
+              <button
+                (click)="DeleteClick(bookData.bookId)"
+                class="btn m-1 rounded-pill shadow"
+                style="background-color: #e76f51"
+              >
+                <li class="fa fa-trash"></li>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

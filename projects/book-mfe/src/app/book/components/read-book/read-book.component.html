@@ -1,0 +1,18 @@
+<div class="container" id="Container">
+  <div class="border mx-auto m-2" style="border: 1px solid #008cba; border-radius: 5px">
+    <div>
+      <h1 class="text-center text-primary">Book Title</h1>
+      <hr/>
+      <h3 class="text-primary px-md-5">Content</h3>
+    </div>
+  </div>
+  <button
+              (click)="onPress()"
+              class="btn btn-danger btn-block col shadow"
+            >
+              Back to List
+            </button>
+            <div id="list-render" routerLink="books/list" *ngIf="display">
+              <app-book-list></app-book-list>
+            </div>
+</div>

@@ -1,0 +1,183 @@
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <div class="container border rounded m-2 shadow">
+    <div class="row m-2">
+      <div class="col-6">
+        <div class="form-group form-control mt-2 shadow">
+          <label for="titletext">Title</label>
+          <input
+            id="titletext"
+            type="text"
+            name="title"
+            minlength="3"
+            maxlength="50"
+            [(ngModel)]="newBook.title"
+            #name="ngModel"
+            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }"
+            required
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              userForm.invalid &&
+              (userForm.dirty || userForm.touched || userForm.submitted)
+            "
+          >
+            <span
+              class="text-danger text-center"
+              *ngIf="userForm.hasError('required', 'title')"
+            >
+              Title is Required!!
+            </span>
+          </div>
+          <!-- <div *ngIf=""></div> -->
+        </div>
+        <div class="form-group form-control mt-2 shadow">
+          <label for="authorText">Author</label>
+          <input
+            id="authorText"
+            type="text"
+            name="author"
+            minlength="3"
+            maxlength="20"
+            [(ngModel)]="newBook.author"
+            #name="ngModel"
+            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }"
+            required
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              userForm.invalid &&
+              (userForm.dirty || userForm.touched || userForm.submitted)
+            "
+          >
+            <span
+              class="text-danger text-center"
+              *ngIf="userForm.hasError('required', 'author')"
+            >
+              Author is Required!!
+            </span>
+          </div>
+        </div>
+        <div class="form-group form-control mt-2 shadow">
+          <label for="distext">Discription</label>
+          <!-- <input
+            id="distext"
+            type="text"
+            name="discript"
+            [(ngModel)]="newBook.discription"
+            #name="ngModel"
+            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }"
+            required
+            class="form-control"
+          /> -->
+          <ckeditor
+            [editor]="Editor"
+            id="distext"
+            type="text"
+            name="discript"
+            [(ngModel)]="newBook.description"
+            #name="ngModel"
+            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }"
+            required
+            class="form-control"
+          ></ckeditor>
+          <div
+            *ngIf="
+              userForm.invalid &&
+              (userForm.dirty || userForm.touched || userForm.submitted)
+            "
+          >
+            <span
+              class="text-danger text-center"
+              *ngIf="userForm.hasError('required', 'discript')"
+            >
+              Discription can't be Empty!!
+            </span>
+          </div>
+          <!-- <editor  [(ngModel)]="newBook.discription" name="discription" type="text" #name="ngModel"
+          [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required class="form-control" /> -->
+        </div>
+
+        <div class="form-group form-control mt-2 shadow">
+          <label>Genre</label>
+          <select
+            class="form-control"
+            name="genre"
+            [(ngModel)]="newBook.genre.genreName"
+            #name="ngModel"
+          >
+            <option selected>--Choose State--</option>
+            <option *ngFor="let item of genreList" [value]="item.genreId">
+              {{ item.genreName }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group form-control mt-2 shadow">
+          <label>Image</label>
+          <input
+            type="file"
+            class="form-control"
+            name="imgFile"
+            [(ngModel)]="newBook.image"
+            #name="ngModel"
+          />
+        </div>
+        <div class="form-group form-control mt-2 shadow">
+          <label for="authorText">User</label>
+          <input
+            id="userText"
+            type="text"
+            name="user"
+            minlength="3"
+            maxlength="20"
+            [(ngModel)]="newBook.userId"
+            #name="ngModel"
+            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }"
+            required
+            class="form-control"
+          />
+          <div
+            *ngIf="
+              userForm.invalid &&
+              (userForm.dirty || userForm.touched || userForm.submitted)
+            "
+          >
+            <span
+              class="text-danger text-center"
+              *ngIf="userForm.hasError('required', 'author')"
+            >
+              User is Required!!
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group m-2" style="text-align: right">
+            <button
+              (click)="SaveClick()"
+              class="btn btn-danger btn-block col m-1 shadow"
+            >
+              Submit
+            </button>
+            <div id="list-render" routerLink="books/list" *ngIf="display">
+              <app-book-list></app-book-list>
+            </div>
+
+            <button
+              (click)="onPress()"
+              class="btn btn-danger btn-block col shadow"
+            >
+              Back to List
+            </button>
+            <div id="list-render" routerLink="books/list" *ngIf="display">
+              <app-book-list></app-book-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
